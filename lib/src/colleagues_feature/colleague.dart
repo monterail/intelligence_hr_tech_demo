@@ -16,3 +16,10 @@ class Colleague {
 
   const Colleague({required this.id, required this.name});
 }
+
+extension ProfilePic on Colleague {
+  String get profilePic {
+    final index = int.tryParse(id.split('-').last) ?? 0;
+    return 'https://picsum.photos/id/${index + 50}/200';
+  }
+}

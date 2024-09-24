@@ -22,14 +22,17 @@ class ColleagueDetailsRoute
   ColleagueDetailsRoute({
     _i4.Key? key,
     required String id,
+    int points = 0,
     List<_i3.PageRouteInfo>? children,
   }) : super(
           ColleagueDetailsRoute.name,
           args: ColleagueDetailsRouteArgs(
             key: key,
             id: id,
+            points: points,
           ),
           rawPathParams: {'id': id},
+          rawQueryParams: {'points': points},
           initialChildren: children,
         );
 
@@ -39,12 +42,19 @@ class ColleagueDetailsRoute
     name,
     builder: (data) {
       final pathParams = data.inheritedPathParams;
+      final queryParams = data.queryParams;
       final args = data.argsAs<ColleagueDetailsRouteArgs>(
-          orElse: () =>
-              ColleagueDetailsRouteArgs(id: pathParams.getString('id')));
+          orElse: () => ColleagueDetailsRouteArgs(
+                id: pathParams.getString('id'),
+                points: queryParams.getInt(
+                  'points',
+                  0,
+                ),
+              ));
       return _i1.ColleagueDetailsView(
         key: args.key,
         id: args.id,
+        points: args.points,
       );
     },
   );
@@ -54,15 +64,18 @@ class ColleagueDetailsRouteArgs {
   const ColleagueDetailsRouteArgs({
     this.key,
     required this.id,
+    this.points = 0,
   });
 
   final _i4.Key? key;
 
   final String id;
 
+  final int points;
+
   @override
   String toString() {
-    return 'ColleagueDetailsRouteArgs{key: $key, id: $id}';
+    return 'ColleagueDetailsRouteArgs{key: $key, id: $id, points: $points}';
   }
 }
 
